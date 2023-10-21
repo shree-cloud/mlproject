@@ -10,6 +10,11 @@ from dataclasses import dataclass
 
 
 
+PATH = 'notebook\data\stud.csv'
+
+
+
+
 @dataclass
 class DataIngestionConfig:
     train_data_path:str = os.path.join('artifacts','train.csv')
@@ -26,7 +31,7 @@ class DataIngestion:
     def initiate_data_ingestion(self):
         logging.info(f"{'>>'*20} Data Ingestion {'<<'*20}")
         try:
-            df = pd.read_csv('notebook\data\stud.csv')
+            df = pd.read_csv(PATH)
             logging.info("Dataset loaded in dataframe")
 
             os.makedirs(os.path.dirname(self.ingestion_config.train_data_path), exist_ok=True)
@@ -34,7 +39,7 @@ class DataIngestion:
             df.to_csv(self.ingestion_config.data_path, index=False, header=True)
 
             logging.info("initiating train-test-split")
-            train_set, test_set = train_test_split(df, test_size=0.2,random_state=42)
+            train_set, test_set = train_test_split(df, test_size=0.2, random_state=42)
 
             train_set.to_csv(self.ingestion_config.train_data_path, index=False, header=True)
 
