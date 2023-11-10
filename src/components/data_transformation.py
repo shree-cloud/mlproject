@@ -73,8 +73,9 @@ class DataTransformation:
         except Exception as e:
             raise CustomException(e,sys) 
         
-    def initiate_data_transformer(self,train_path, test_path):
+    def initiate_data_transformer(self, train_path, test_path):
         try:
+            logging.info(f"{'>>'*20} Data Transformation {'<<'*20}")
             logging.info("reading the train and test datasets.")
             
             train_df = pd.read_csv(train_path)
